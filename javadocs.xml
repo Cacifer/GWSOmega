@@ -4,6 +4,9 @@
 
      GWSOmega    
      javadocs gen build script
+     
+     Look folks I run this inside an IDE, do not try this 
+     outside of an IDE..please
                    
      fredgrott                                                                
      ====================================================================== -->
@@ -14,6 +17,8 @@
 	
 	<property environment="env"/>
 	<tstamp/>
+	<property file="project.properties"/>
+	<property file="local.properties"/>
 	<property name="build.config.dir" location="${basedir}/build.config"/>
 	<property name="ant.task.jars.dir" location="${build.config.dir}/ant"/>
 	<property name="ant,task.bootstrap.jar.dir" location="${build.config.dir}/ant.bootstrap"/>
@@ -23,7 +28,7 @@
 	<mkdir dir="${basedir}/lib"/>
 	<property name="doclava.templatedir" location="${doclava.config.dir}/assets/templates"/>
 	<property name="doclava.htmldir" location="${doclava.config.dir}/htmldir"/>
-	
+	<property name="android.platorm.jar" location="${sdk.dir}/platforms/${target}/android.jar"/>
 	
 	<path id="apache.ivy.path">
          <fileset dir="${ant,task.bootstrap.jar.dir}" >
@@ -39,39 +44,58 @@
 	classpathref="apache.ivy.path"/>
 	<taskdef name="cachepath" classname="org.apache.ivy.ant.IvyCachePath"
 	classpathref="apache.ivy.path"/>
+	
+	<path id="our.android.jar.path">
+	 <pathelement location="${javahome}/jre/lib/rt.jar"/>
+		<pathelement location="${android.platorm.jar}"/>
+   </path>
+	<path id="our.project.libs.path">
+	       <fileset dir="${basedir}/libs" >
+            <include name="*.jar"/>
+    
+             </fileset>
 
+	</path>
    <target name="-ivyprep" description="ivy prep">
    	<!-- Easiest way to set this up is to organize by 
    	     confs for the ant paths. That means you do a 
    	     little more work in organizing the ivy confs 
    	     when setting up the ivy repo but it reduces 
-   	     a lot of work. -->
+   	     a lot of work. 
+   	     
+   	     globmapper is used to map specific jars to specific
+   	     jar filesot simplify soem jarlocations.
+   	     -->
    	<resolve file="${basedir}/ivy.xml"/>
    	   <retrieve pattern="lib/[conf]/[artifact].[ext]">
-   	    
+   	   <globmapper from="lib/doclet/gwsdroidlava-*.jar" to="lib/doclet/gwsdroidlava.jar" />
    	  </retrieve>
    	<cachepath pathid="doclet.classpath" conf="doclet" />
-   	<property name="doclava.jar" location="${basedir}/lib/doclet/gwsdroidlava-1.0.jar"/>
+   	<property name="doclava.jar" location="${basedir}/lib/doclet/gwsdroidlava.jar"/>
    	</target>
 	
 	<target name="-javadocs" description="javadocs">
 		<javadoc packagenames="*.*.*"
 		           destdir="${basedir}/docs"
-		           sourcepath="src"
+		           sourcepath="src:gen"
+			       classpathref="our.project.libs.path"
 		           docletpath="${doclava.jar}"
-		           bootclasspath="${javahome}/jre/lib/rt.jar"
+		           bootclasspathref="our.android.jar.path"
 		           >
 		      <doclet name="com.google.doclava.Doclava">
-		        <param name="-stubs" value="build/stubs" />
-		        <param name="-hdf"/> <param name="project.name"/> <param name="Doclava"/>
+		        <param name="-stubs" value="bin/stubs" />
+		      	<!-- embedding javadocs in website parameters-->
+		      	<param name="-templatedir" value="${doclava.templatedir}"/>
+		      	<param name="-htmldir" value="${doclava.htmldir}"/>
+		      	<!--shows all including hidden-->
+		      	<param name="-hidden"/>
+		      	<!-- hdf parameters -->
+		        <param name="-hdf"/> <param name="project.name"/> <param name="${ant.project.name}"/>
 		        <!-- versioning -->
-		        <param name="-since"/> <param name="doclava/previous.xml"/> <param name="v1" />
-		        <param name="-apiversion" value="v2"/>
+		        
 		        <!-- federation -->
-		        <param name="-federate" /><param name="JDK"/>
-		        <param name="http://download.oracle.com/javase/6/docs/api/index.html?"/>
-		        <param name="-federationxml"/><param name="JDK"/>
-		        <param name="http://doclava.googlecode.com/svn/static/api/openjdk-6.xml"/>
+		        
+		        
 		      </doclet>
 		    </javadoc>
 	</target>
