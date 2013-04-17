@@ -1,0 +1,15 @@
+page.title=GWSDroidLava, the better DocLava
+walkthru=0
+header.hide=0
+
+@jd:body
+
+<p>DocLava is nice but with that little divergence between 
+DocLava at GogoleCode and the ASOP which one works to give 
+stunning great project websites? </p>
+
+<p>Find out <a href="{@docRoot}about/why.html">Why GWSDroidLava</a> was created.</p>
+
+<p>Find out <a href="{@docRoot}about/who.html">Who uses GWSDroidLava</a>.</p>
+
+<p>Find out <a href="{@docRoot}about/contributes.html">Who contributes to GWSDroidlava</a>.</p>

@@ -19,7 +19,8 @@
 	<property name="ant,task.bootstrap.jar.dir" location="${build.config.dir}/ant.bootstrap"/>
 	<property name="doclets.jars.dir" location="${build.config.dir}/doclets/doclets.jars"/>
 	<property name="doclava.config.dir" location="${build.config.dir}/doclets/doclava.config"/>
-	
+	<mkdir dir="${basedir}/docs"/>
+	<mkdir dir="${basedir}/lib"/>
 	<path id="apache.ivy.path">
          <fileset dir="${ant,task.bootstrap.jar.dir}" >
             <include name="ivy-2.3.0.jar"/>
