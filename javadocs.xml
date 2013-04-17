@@ -19,8 +19,12 @@
 	<property name="ant,task.bootstrap.jar.dir" location="${build.config.dir}/ant.bootstrap"/>
 	<property name="doclets.jars.dir" location="${build.config.dir}/doclets/doclets.jars"/>
 	<property name="doclava.config.dir" location="${build.config.dir}/doclets/doclava.config"/>
-	<mkdir dir="${basedir}/docs"/>
+	<mkdir dir="${basedir}/docs/getit"/>
 	<mkdir dir="${basedir}/lib"/>
+	<property name="doclava.templatedir" location="${doclava.config.dir}/assets/templates"/>
+	<property name="doclava.htmldir" location="${doclava.config.dir}/htmldir"/>
+	
+	
 	<path id="apache.ivy.path">
          <fileset dir="${ant,task.bootstrap.jar.dir}" >
             <include name="ivy-2.3.0.jar"/>
@@ -36,7 +40,7 @@
 	<taskdef name="cachepath" classname="org.apache.ivy.ant.IvyCachePath"
 	classpathref="apache.ivy.path"/>
 
-   <target name="ivyprep" description="ivy prep">
+   <target name="-ivyprep" description="ivy prep">
    	<!-- Easiest way to set this up is to organize by 
    	     confs for the ant paths. That means you do a 
    	     little more work in organizing the ivy confs 
@@ -46,8 +50,31 @@
    	   <retrieve pattern="lib/[conf]/[artifact].[ext]">
    	    
    	  </retrieve>
-   	<cachepath pathid="doclava.classpath" conf="doclava" />
+   	<cachepath pathid="doclet.classpath" conf="doclet" />
+   	<property name="doclava.jar" location="${basedir}/lib/doclet/gwsdroidlava-1.0.jar"/>
    	</target>
+	
+	<target name="-javadocs" description="javadocs">
+		<javadoc packagenames="*.*.*"
+		           destdir="${basedir}/docs"
+		           sourcepath="src"
+		           docletpath="${doclava.jar}"
+		           bootclasspath="${javahome}/jre/lib/rt.jar"
+		           >
+		      <doclet name="com.google.doclava.Doclava">
+		        <param name="-stubs" value="build/stubs" />
+		        <param name="-hdf"/> <param name="project.name"/> <param name="Doclava"/>
+		        <!-- versioning -->
+		        <param name="-since"/> <param name="doclava/previous.xml"/> <param name="v1" />
+		        <param name="-apiversion" value="v2"/>
+		        <!-- federation -->
+		        <param name="-federate" /><param name="JDK"/>
+		        <param name="http://download.oracle.com/javase/6/docs/api/index.html?"/>
+		        <param name="-federationxml"/><param name="JDK"/>
+		        <param name="http://doclava.googlecode.com/svn/static/api/openjdk-6.xml"/>
+		      </doclet>
+		    </javadoc>
+	</target>
 
 
     <!-- ================================= 
