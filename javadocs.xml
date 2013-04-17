@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ====================================================================== 
+     Apr 17, 2013 4:32:08 AM                                                        
+
+     GWSOmega    
+     javadocs gen build script
+                   
+     fredgrott                                                                
+     ====================================================================== -->
+<project name="GWSOmega" default="default">
+    <description>
+            javadocs gen build script
+    </description>
+	
+	<property environment="env"/>
+	<tstamp/>
+	<property name="build.config.dir" location="${basedir}/build.config"/>
+	<property name="ant.task.jars.dir" location="${build.config.dir}/ant"/>
+	<property name="ant,task.bootstrap.jar.dir" location="${build.config.dir}/ant.bootstrap"/>
+	<property name="doclets.jars.dir" location="${build.config.dir}/doclets/doclets.jars"/>
+	<property name="doclava.config.dir" location="${build.config.dir}/doclets/doclava.config"/>
+	
+	<path id="apache.ivy.path">
+         <fileset dir="${ant,task.bootstrap.jar.dir}" >
+            <include name="ivy-2.3.0.jar"/>
+         </fileset>
+    </path>
+	
+	<taskdef resource="org/apache/ivy/ant/antlib.xml"
+	         uri="antlib:org.apache.ivy.ant" classpathref="apache.ivy.path"/>
+	<taskdef name="ivy-retrieve" classname="org.apache.ivy.ant.IvyRetrieve"
+		classpathref="apache.ivy.path"/>
+	<taskdef name="ivy-resolve" classname="org.apache.ivy.ant.IvyResolve"
+	classpathref="apache.ivy.path"/>
+	<taskdef name="cachepath" classname="org.apache.ivy.ant.IvyCachePath"
+	classpathref="apache.ivy.path"/>
+
+   <target name="ivyprep" description="ivy prep">
+   	<!-- Easiest way to set this up is to organize by 
+   	     confs for the ant paths. That means you do a 
+   	     little more work in organizing the ivy confs 
+   	     when setting up the ivy repo but it reduces 
+   	     a lot of work. -->
+   	<resolve file="${basedir}/ivy.xml"/>
+   	   <retrieve pattern="lib/[conf]/[artifact].[ext]">
+   	    
+   	  </retrieve>
+   	<cachepath pathid="doclava.classpath" conf="doclava" />
+   	</target>
+
+
+    <!-- ================================= 
+          target: default              
+         ================================= -->
+    <target name="default" depends="depends" description="javadocs gen build script">
+        
+    </target>
+
+    <!-- - - - - - - - - - - - - - - - - - 
+          target: depends                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="depends">
+    </target>
+
+</project>
