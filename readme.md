@@ -3,6 +3,19 @@ GWSOmega
 
 # Introduction
 
+Generally there are two ways do backwards comaptible UIs for android.
+One is of course to use ActionbarSherlock and Holoeverywhere, but its not 
+the only one.
+
+The other option is to use an actionbar compat library and use a theme selector 
+which will force android OS to use yo defined theme for older pre 3.x devices and
+it will choose the holo derived theme for 3.x and newer deivces. The technique is 
+detailed 
+
+[Backwards compatible UIs]('http://stackoverflow.com/questions/10716514/android-holo-themes-with-backwards-compatibility')
+
+Hence this library is using the 2nd technique.
+
 # License
 
 
