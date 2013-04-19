@@ -12,7 +12,8 @@
      ====================================================================== -->
 <project name="GWSOmega" default="default"
 	xmlns:oja="jwaresoftware.antxtras" 
-	xmlns:emit="jwaresoftware.log4ant">
+	xmlns:emit="jwaresoftware.log4ant"
+	xmlns:ivy="antlib:org.apache.ivy.ant">
     <description>
             javadocs gen build script
     </description>
@@ -57,12 +58,7 @@
 	
 	<taskdef resource="org/apache/ivy/ant/antlib.xml"
 	         uri="antlib:org.apache.ivy.ant" classpathref="apache.ivy.path"/>
-	<taskdef name="ivy-retrieve" classname="org.apache.ivy.ant.IvyRetrieve"
-		classpathref="apache.ivy.path"/>
-	<taskdef name="ivy-resolve" classname="org.apache.ivy.ant.IvyResolve"
-	classpathref="apache.ivy.path"/>
-	<taskdef name="cachepath" classname="org.apache.ivy.ant.IvyCachePath"
-	classpathref="apache.ivy.path"/>
+	
 	<!-- load all antxtra libs taskdefs -->
 	    <taskdef uri="jwaresoftware.antxtras"
 	         resource="org/jwaresoftware/antxtras/install/antlib-advanced.xml"
@@ -125,11 +121,12 @@
    	     globmapper is used to map specific jars to specific
    	     jar filesot simplify soem jarlocations.
    	     -->
-   	<resolve file="${basedir}/ivy.xml"/>
-   	   <retrieve pattern="lib/[conf]/[artifact].[ext]">
-   	   <globmapper from="lib/doclet/gwsdroidlava-*.jar" to="lib/doclet/gwsdroidlava.jar" />
-   	  </retrieve>
-   	<cachepath pathid="doclet.classpath" conf="doclet" />
+   	<ivy:resolve file="${basedir}/ivy.xml"/>
+   	   <ivy:retrieve pattern="${basedir}/lib/[conf]/[artifact].[ext]">
+   	   <globmapper from="${basedir}/lib/doclet/gwsdroidlava-*.jar" 
+   	   	to="${basedir}/lib/doclet/gwsdroidlava.jar" />
+   	  </ivy:retrieve>
+   	<ivy:cachepath pathid="doclet.classpath" conf="doclet" />
    	<property name="doclava.jar" location="${basedir}/lib/doclet/gwsdroidlava.jar"/>
    	</target>
 	

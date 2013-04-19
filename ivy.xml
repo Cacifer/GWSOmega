@@ -28,6 +28,6 @@
 	    <conf name="doclet"/>
 	</configurations>
 	<dependencies>
-	     <dependency org="gws.grottworkshop" name="doclava" rev="1.0" conf="doclet"/>
+	     <dependency org="gws.grottworkshop" name="gwsdroidlava" rev="1.0" conf="doclet"/>
 	</dependencies>
 </ivy-module>

@@ -1,15 +1,9 @@
-page.title=GWSDroidLava, the better DocLava
+page.title=GWSOmega, why
 walkthru=0
 header.hide=0
 
 @jd:body
 
-<p>DocLava is nice but with that little divergence between 
-DocLava at GogoleCode and the ASOP which one works to give 
-stunning great project websites? </p>
+<p> </p>
 
-<p>And hence the problem, as most are not aware that the AOSP 
-DocLava copy is the actual working one to embed javadocs in 
-websites. Thus, DocLava has been forked from the AOSP DocLava 
-source with some minor improvements and tbis project 
-site to give some pointers on how to use it.</p>
+<p></p>

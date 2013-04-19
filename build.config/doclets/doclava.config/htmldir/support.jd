@@ -14,7 +14,7 @@ fullpage=1
 <h5>Repo</h5>
 <p style="color:#888">
 
-<a href="https://bitbucket.org/fredgrott/gwsdroidlava/issues?status=new&status=open">issue tracker</a> submission form<br />
+<a href="https://github.com/shareme/GWSOmega/issues">issue tracker</a> submission form<br />
 
 </p>
 
@@ -33,8 +33,8 @@ fullpage=1
 uppercase;border-bottom: 1px solid #CCC;margin: 0 0 20px;">End User Support</h3>
 <h5>Help center</h5>
 <p style="color:#888">
-  <a href="https://bitbucket.org/fredgrott/gwsdroidlava/issues?status=new&status=open">Issues</a><br />
-  <a href="https://bitbucket.org/fredgrott/gwsdroidlava/wiki">Wiki</a><br />
+  <a href="https://github.com/shareme/GWSOmega/issues">Issues</a><br />
+  <a href="https://github.com/shareme/GWSOmega/wiki">Wiki</a><br />
 </p>
 
 

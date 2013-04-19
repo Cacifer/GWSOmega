@@ -1,0 +1,2925 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<link rel="shortcut icon" type="image/x-icon" href="../../../../favicon.ico" />
+<title>DiskLruCache | GWSOmega</title>
+
+<!-- STYLESHEETS -->
+<!-- rather than the webfont load we do a local font load-->
+<style type="text/css">
+@font-face {
+    font-family: "Inconsolata-Bold";
+    src: url("../../../../assets/fonts/Inconsolata-Bold") format("truetype");
+}
+@font-face {
+    font-family: "Roboto-Black";
+    src: url("../../../../assets/fonts/Roboto-Black") format("truetype");
+}
+@font-face {
+   font-family: "Roboto-BlackItalic":
+   src: url("../../../../assets/fonts/RobotoBlackItalic") format("truetype");
+}
+@font-face {
+   font-family: "Roboto-Bold";
+   src: url("../../../../assets/fonts/Roboto-Bold") format("truetype");
+}
+@font-face {
+   font-family: "Roboto-BoldCondensed";
+   src: url("../../../../assets/fonts/Roboto-BoldCondensed") format("truetype");
+}
+@font-face {
+   font-family: "Roboto-BoldCondensedItalic";
+   src: url("../../../../assets/fonts/Roboto-BoldCondensedItalic") format("truetype");
+}
+@font-face {
+   font-family: "Roboto-BoldItalic";
+   src: url("../../../../assets/fonts/Roboto-BoldItalic") format("truetype");
+}
+@font-face {
+   font-family: "Roboto-Condensed";
+   src: url("../../../../assets/fonts/Roboto-Condensed") format("truetype");
+}
+@font-face {
+   font-family: "Roboto-CondensedItalic";
+   src: url("../../../../assets/fonts/Roboto-CondensedItalic") format("truetype");
+}
+@font-face {
+   font-family: "Roboto-Italic";
+   src: url("../../../../assets/fonts/Roboto-Italic") format("truetype");
+}
+@font-face {
+   font-family: "Roboto-Light";
+   src: url("../../../../assets/fonts/Roboto-Light") format("truetype");
+}
+@font-face {
+   font-family: "Roboto-Medium";
+   src: url("</cs var:toroot ?>assets/fonts/Roboto-Medium") format("truetype");
+}
+@font-face {
+   font-family: "Roboto-MediumItalic";
+   src: url("../../../../assets/fonts/Roboto-MediumItalic") format("truetype");
+}
+@font-face {
+   font-family: "Roboto-Regular";
+   src: url("../../../../assets/fonts/Roboto-Regular") format("truetype");
+}
+@font-face {
+   font-family: "Roboto-Thin";
+   src: url("../../../../assets/fonts/Roboto-Thin") format("trutype");
+}
+@font-face {
+   font-family: "Roboto-ThinItalic";
+   src: url("../../../../assets/fonts/Roboto-ThinItalic") format("truetype");
+}
+</style>
+<link href="../../../../assets/css/default.css" rel="stylesheet" type="text/css">
+
+
+<!-- FULLSCREEN STYLESHEET -->
+<link href="../../../../assets/css/fullscreen.css" rel="stylesheet" class="fullscreen"
+type="text/css">
+
+
+<!-- JAVASCRIPT -->
+
+<script src="../../../../assets/js/global-libraries-combined.js" type="text/javascript"></script>
+<script type="text/javascript">
+  var toRoot = "../../../../";
+</script>
+<script src="../../../../assets/js/docs.js" type="text/javascript"></script>
+<script src="../../../../navtree_data.js" type="text/javascript"></script>
+
+</head>
+<body class="gc-documentation 
+  develop" itemscope itemtype="http://schema.org/Article">
+  <div id="doc-api-level" class="" style="display:none"></div>
+  <a name="top"></a>
+
+    <!-- Header -->
+    <div id="header">
+        <div class="wrap" id="header-wrap">
+          <div class="col-3 logo">
+          <a href="../../../../index.html">
+            <img src="../../../../assets/images/project_logo.png" width="25" height="25" alt="GWSDroidLava"/>
+          </a>
+          <div class="btn-quicknav" id="btn-quicknav">
+                <a href="#" class="arrow-inactive">Quicknav</a>
+                        <a href="#" class="arrow-active">Quicknav</a>
+          </div>
+          </div>
+            <ul class="nav-x col-9">
+                <li class="usage"><a href="../../../../usage/index.html"  >Usage</a></li>
+                <li class="develop"><a href="../../../../develop/index.html" class="selected" >Develop</a></li>
+                <li class="getit last"><a href="../../../../getit/index.html"  >GetIt</a></li>
+            </ul>
+            
+            <!-- New Search -->
+            <div class="menu-container">
+            <div class="moremenu">
+    <div id="more-btn"></div>
+  </div>
+  <div class="morehover" id="moremenu">
+    <div class="top"></div>
+    <div class="mid">
+      <div class="header">Links</div>
+      <ul>
+        <li><a href="http://fredgrott.bitbucket.org">Fred Grott(GrottWorkShoop)</a></li>
+        <li><a href="http://grottworkshop.blogspot.com/">Fred Grott(GWS) Blog</a></li>
+      </ul>
+      <div class="header">Android Sites</div>
+      <ul>
+        <li><a href="http://www.android.com">Android.com</a></li>
+        <li class="active"><a>Android Developers</a></li>
+        <li><a href="http://source.android.com">Android Open Source Project</a></li>
+      </ul>
+      
+      <div class="header">Languages</div>
+        <div id="language" class="locales">
+          <select name="language" onChange="changeLangPref(this.value, true)">
+              <option value="en">English</option>
+              <option value="es">Español</option>
+              <option value="ja">日本語</option>
+              <option value="ko">한국어</option>
+              <option value="ru">Русский</option>
+              <option value="zh-CN">中文 (中国)
+      </option>
+          </select>     
+        </div>
+      <script type="text/javascript">
+        <!--  
+        loadLangPref();  
+          //-->
+      </script>
+      <br class="clearfix" />
+    </div>
+    <div class="bottom"></div>
+  </div>
+  <div class="search" id="search-container">
+    <div class="search-inner">
+      <div id="search-btn"></div>
+      <div class="left"></div>
+      <form onsubmit="return submit_search()">
+        <input id="search_autocomplete" type="text" value="" autocomplete="off" name="q"
+onfocus="search_focus_changed(this, true)" onblur="search_focus_changed(this, false)"
+onkeydown="return search_changed(event, true, '../../../../')" 
+onkeyup="return search_changed(event, false, '../../../../')" />
+      </form>
+      <div class="right"></div>
+        <a class="close hide">close</a>
+        <div class="left"></div>
+        <div class="right"></div>
+    </div>
+  </div>
+  <div id="search_filtered_wrapper">
+    <div id="search_filtered_div" class="no-display">
+        <ul id="search_filtered">
+        </ul>
+    </div>
+  </div>
+  
+  </div>
+  <!-- /New Search>
+          
+          
+          <!-- Expanded quicknav -->
+           <div id="quicknav" class="col-9">
+                <ul>
+                    <li class="usage">
+                      <ul>
+                        <li><a href="../../../../usage/starting.html">Getting Started</a></li>
+                        <li><a href="../../../../usage/advanced.html">Advanced</a></li>
+                        
+                      </ul>
+                    </li>
+                    <li class="develop">
+                      <ul>
+                        <li><a href="../../../../codeqa/index.html">Project CodeQA</a></li>
+                        <li><a href="../../../../devguide/components/index.html">Dev Guides</a></li>
+                        <li><a href="../../../../reference/packages.html">Reference</a></li>
+                        <li><a href="../../../../devtools/index.html">DevTools</a></li>
+                      </ul>
+                    </li>
+                    <li class="getit last">
+                      <ul>
+                        <li><a href="../../../../getit/projectlibrary.html">Jar</a></li>
+                        <li><a href="../../../../getit/source.html">Publishing</a></li>
+                        </ul>
+                    </li>
+                </ul>
+          </div>
+          <!-- /Expanded quicknav -->
+        </div>
+    </div>
+    <!-- /Header -->
+    
+    
+  <div id="searchResults" class="wrap" style="display:none;">
+          <h2 id="searchTitle">Results</h2>
+          <div id="leftSearchControl" class="search-control">Loading...</div>
+  </div>
+    
+    
+    
+
+    <!-- Secondary x-nav -->
+    <div id="nav-x">
+        <div class="wrap">
+            <ul class="nav-x col-9 develop" style="width:75%">
+                <li><a href="../../../../codeqa/index.html"  >Project CodeQA</a></li>
+                  <li><a href="../../../../devguide/index.html"  >Dev Guides</a></li>
+                <li><a href="../../../../reference/packages.html" class="selected" >Reference</a></li>
+                <li><a href="../../../../devtools/index.html"  >Dev Tools</a></li>
+            </ul>
+          
+        </div>
+        
+    </div>
+    <!-- /Sendondary x-nav -->
+
+  
+
+  <div class="wrap clearfix" id="body-content">
+    <div class="col-4" id="side-nav" itemscope itemtype="http://schema.org/SiteNavigationElement">
+      <div id="devdoc-nav">
+<a class="totop" href="#top" data-g-event="left-nav-top">to top</a>
+      <div id="api-nav-header">
+        <div id="api-level-toggle">
+          <label for="apiLevelCheckbox" class="disabled">API level: </label>
+          <div class="select-wrapper">
+            <select id="apiLevelSelector">
+              <!-- option elements added by buildApiLevelSelector() -->
+            </select>
+          </div>
+        </div><!-- end toggle -->
+        <div id="api-nav-title">Android APIs</div>
+        </div><!-- end nav header -->
+      <script>
+        var SINCE_DATA = [  ];
+        buildApiLevelSelector();
+      </script>
+                  
+      <div id="swapper">
+        <div id="nav-panels">
+          <div id="resize-packages-nav">
+            <div id="packages-nav" class="scroll-pane">
+
+              <ul>
+              	
+    <li class="selected api apilevel-">
+  <a href="../../../../reference/com/jakewharton/disklrucache/package-summary.html">com.jakewharton.disklrucache</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../reference/com/wuman/twolevellrucache/package-summary.html">com.wuman.twolevellrucache</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../reference/gws/grottworkshop/gwsomega/package-summary.html">gws.grottworkshop.gwsomega</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../reference/gws/grottworkshop/gwsomega/cache/package-summary.html">gws.grottworkshop.gwsomega.cache</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../reference/gws/grottworkshop/gwsomega/graphics/drawable/package-summary.html">gws.grottworkshop.gwsomega.graphics.drawable</a></li>
+    <li class="api apilevel-">
+  <a href="../../../../reference/gws/grottworkshop/gwsomega/runnable/package-summary.html">gws.grottworkshop.gwsomega.runnable</a></li>
+              </ul><br/>
+
+            </div> <!-- end packages-nav -->
+          </div> <!-- end resize-packages -->
+          <div id="classes-nav" class="scroll-pane">
+
+
+
+            <ul>
+              
+              
+    <li><h2>Classes</h2>
+      <ul>
+          <li class="selected api apilevel-"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html">DiskLruCache</a></li>
+          <li class="api apilevel-"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.Editor.html">DiskLruCache.Editor</a></li>
+          <li class="api apilevel-"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.Snapshot.html">DiskLruCache.Snapshot</a></li>
+          <li class="api apilevel-"><a href="../../../../reference/com/jakewharton/disklrucache/Util.html">Util</a></li>
+      </ul>
+    </li>
+              
+              
+              
+            </ul><br/>
+        
+
+          </div><!-- end classes -->
+        </div><!-- end nav-panels -->
+        <div id="nav-tree" style="display:none" class="scroll-pane">
+          <div id="tree-list"></div>
+        </div><!-- end nav-tree -->
+      </div><!-- end swapper -->
+      <div id="nav-swap">
+      <a class="fullscreen">fullscreen</a>
+      <a href='#' onclick='swapNav();return false;'><span id='tree-link'>Use Tree Navigation</span><span id='panel-link' style='display:none'>Use Panel Navigation</span></a>
+      </div>
+    </div> <!-- end devdoc-nav -->
+    </div> <!-- end side-nav -->
+    <script type="text/javascript">
+      // init fullscreen based on user pref
+      var fullscreen = readCookie("fullscreen");
+      if (fullscreen != 0) {
+        if (fullscreen == "false") {
+          toggleFullscreen(false);
+        } else {
+          toggleFullscreen(true);
+        }
+      }
+      // init nav version for mobile
+      if (isMobile) {
+        swapNav(); // tree view should be used on mobile
+        $('#nav-swap').hide();
+      } else {
+        chooseDefaultNav();
+        if ($("#nav-tree").is(':visible')) {
+          init_default_navtree("../../../../");
+        }
+      }
+      // scroll the selected page into view
+      $(document).ready(function() {
+        scrollIntoView("packages-nav");
+        scrollIntoView("classes-nav");
+        });
+    </script>
+
+
+<div class="col-12"  id="doc-col">
+
+<div id="api-info-block">
+
+
+
+  
+   
+  
+  
+  
+  
+
+  
+   
+  
+  
+  
+  
+
+
+<div class="sum-details-links">
+
+Summary:
+
+  <a href="#nestedclasses">Nested Classes</a>
+  
+
+
+
+
+
+  &#124; <a href="#constants">Constants</a>
+  
+
+
+
+  &#124; <a href="#lfields">Fields</a>
+  
+
+
+
+
+
+  &#124; <a href="#pubmethods">Methods</a>
+  
+
+
+
+  &#124; <a href="#inhmethods">Inherited Methods</a>
+
+&#124; <a href="#" onclick="return toggleAllClassInherited()" id="toggleAllClassInherited">[Expand All]</a>
+
+</div><!-- end sum-details-links -->
+<div class="api-level">
+  
+
+
+  
+  
+
+</div>
+</div><!-- end api-info-block -->
+
+
+<!-- ======== START OF CLASS DATA ======== -->
+
+<div id="jd-header">
+    public
+     
+    final 
+    
+    class
+<h1 itemprop="name">DiskLruCache</h1>
+
+
+
+  
+    extends Object<br/>
+  
+  
+  
+
+  
+  
+      implements 
+      
+        Closeable 
+      
+  
+  
+
+<img src="DiskLruCache.png" width="400" height="400"/>
+</div><!-- end header -->
+
+<div id="naMessage"></div>
+
+<div id="jd-content" class="api apilevel-">
+<table class="jd-inheritance-table">
+
+
+    <tr>
+           
+        <td colspan="2" class="jd-inheritance-class-cell">java.lang.Object</td>
+    </tr>
+    
+
+    <tr>
+        
+            <td class="jd-inheritance-space">&nbsp;&nbsp;&nbsp;&#x21b3;</td>
+           
+        <td colspan="1" class="jd-inheritance-class-cell">com.jakewharton.disklrucache.DiskLruCache</td>
+    </tr>
+    
+
+</table>
+
+
+
+
+
+
+
+<div class="jd-descr">
+
+
+<h2>Class Overview</h2>
+<p itemprop="articleBody">A cache that uses a bounded amount of space on a filesystem. Each cache
+ entry has a string key and a fixed number of values. Each key must match
+ the regex <strong>[a-z0-9_-]{1,64}</strong>. Values are byte sequences,
+ accessible as streams or files. Each value must be between <code>0</code> and
+ <code>Integer.MAX_VALUE</code> bytes in length.
+
+ <p>The cache stores its data in a directory on the filesystem. This
+ directory must be exclusive to the cache; the cache may delete or overwrite
+ files from its directory. It is an error for multiple processes to use the
+ same cache directory at the same time.
+
+ <p>This cache limits the number of bytes that it will store on the
+ filesystem. When the number of stored bytes exceeds the limit, the cache will
+ remove entries in the background until the limit is satisfied. The limit is
+ not strict: the cache may temporarily exceed it while waiting for files to be
+ deleted. The limit does not include filesystem overhead or the cache
+ journal so space-sensitive applications should set a conservative limit.
+
+ <p>Clients call <code><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#edit(java.lang.String)">edit(String)</a></code> to create or update the values of an entry. An
+ entry may have only one editor at one time; if a value is not available to be
+ edited then <code><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#edit(java.lang.String)">edit(String)</a></code> will return null.
+ <ul>
+ <li>When an entry is being <strong>created</strong> it is necessary to
+ supply a full set of values; the empty value should be used as a
+ placeholder if necessary.
+ <li>When an entry is being <strong>edited</strong>, it is not necessary
+ to supply data for every value; values default to their previous
+ value.
+ </ul>
+ Every <code><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#edit(java.lang.String)">edit(String)</a></code> call must be matched by a call to <code><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.Editor.html#commit()">commit()</a></code>
+ or <code><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.Editor.html#abort()">abort()</a></code>. Committing is atomic: a read observes the full set
+ of values as they were before or after the commit, but never a mix of values.
+
+ <p>Clients call <code><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#get(java.lang.String)">get(String)</a></code> to read a snapshot of an entry. The read will
+ observe the value at the time that <code><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#get(java.lang.String)">get(String)</a></code> was called. Updates and
+ removals after the call do not impact ongoing reads.
+
+ <p>This class is tolerant of some I/O errors. If files are missing from the
+ filesystem, the corresponding entries will be dropped from the cache. If
+ an error occurs while writing a cache value, the edit will fail silently.
+ Callers should handle other problems by catching <code>IOException</code> and
+ responding appropriately.
+</p>
+
+
+
+
+
+</div><!-- jd-descr -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="jd-descr">
+
+
+<h2>Summary</h2>
+
+
+
+<!-- ======== NESTED CLASS SUMMARY ======== -->
+<table id="nestedclasses" class="jd-sumtable"><tr><th colspan="12">Nested Classes</th></tr>
+
+
+  
+    <tr class="alt-color api apilevel-" >
+      <td class="jd-typecol"><nobr>
+        
+         
+         
+        
+        class</nobr></td>
+      <td class="jd-linkcol"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.Editor.html">DiskLruCache.Editor</a></td>
+      <td class="jd-descrcol" width="100%">Edits the values for an entry.&nbsp;</td>
+    </tr>
+    
+    
+    <tr class=" api apilevel-" >
+      <td class="jd-typecol"><nobr>
+        
+         
+         
+        
+        class</nobr></td>
+      <td class="jd-linkcol"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.Snapshot.html">DiskLruCache.Snapshot</a></td>
+      <td class="jd-descrcol" width="100%">A snapshot of the values for an entry.&nbsp;</td>
+    </tr>
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- =========== ENUM CONSTANT SUMMARY =========== -->
+<table id="constants" class="jd-sumtable"><tr><th colspan="12">Constants</th></tr>
+
+
+    
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol">long</td>
+        <td class="jd-linkcol"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#ANY_SEQUENCE_NUMBER">ANY_SEQUENCE_NUMBER</a></td>
+        <td class="jd-descrcol" width="100%"></td>
+    </tr>
+    
+    
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol">String</td>
+        <td class="jd-linkcol"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#CLEAN">CLEAN</a></td>
+        <td class="jd-descrcol" width="100%"></td>
+    </tr>
+    
+    
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol">String</td>
+        <td class="jd-linkcol"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#DIRTY">DIRTY</a></td>
+        <td class="jd-descrcol" width="100%"></td>
+    </tr>
+    
+    
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol">String</td>
+        <td class="jd-linkcol"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#JOURNAL_FILE">JOURNAL_FILE</a></td>
+        <td class="jd-descrcol" width="100%"></td>
+    </tr>
+    
+    
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol">String</td>
+        <td class="jd-linkcol"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#JOURNAL_FILE_BACKUP">JOURNAL_FILE_BACKUP</a></td>
+        <td class="jd-descrcol" width="100%"></td>
+    </tr>
+    
+    
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol">String</td>
+        <td class="jd-linkcol"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#JOURNAL_FILE_TEMP">JOURNAL_FILE_TEMP</a></td>
+        <td class="jd-descrcol" width="100%"></td>
+    </tr>
+    
+    
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol">String</td>
+        <td class="jd-linkcol"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#MAGIC">MAGIC</a></td>
+        <td class="jd-descrcol" width="100%"></td>
+    </tr>
+    
+    
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol">String</td>
+        <td class="jd-linkcol"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#READ">READ</a></td>
+        <td class="jd-descrcol" width="100%"></td>
+    </tr>
+    
+    
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol">String</td>
+        <td class="jd-linkcol"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#REMOVE">REMOVE</a></td>
+        <td class="jd-descrcol" width="100%"></td>
+    </tr>
+    
+    
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol">String</td>
+        <td class="jd-linkcol"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#VERSION_1">VERSION_1</a></td>
+        <td class="jd-descrcol" width="100%"></td>
+    </tr>
+    
+    
+
+</table>
+
+
+
+
+
+
+
+<!-- =========== FIELD SUMMARY =========== -->
+<table id="lfields" class="jd-sumtable"><tr><th colspan="12">Fields</th></tr>
+
+
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          
+          static
+          final
+          Pattern</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#LEGAL_KEY_PATTERN">LEGAL_KEY_PATTERN</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          static
+          final
+          OutputStream</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#NULL_OUTPUT_STREAM">NULL_OUTPUT_STREAM</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          final
+          int</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#appVersion">appVersion</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          final
+          Callable&lt;Void&gt;</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#cleanupCallable">cleanupCallable</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          final
+          File</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#directory">directory</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          
+          
+          final
+          ThreadPoolExecutor</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#executorService">executorService</a></td>
+          <td class="jd-descrcol" width="100%">This cache uses a single background thread to evict entries.</td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          final
+          File</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#journalFile">journalFile</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          final
+          File</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#journalFileBackup">journalFileBackup</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          final
+          File</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#journalFileTmp">journalFileTmp</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          Writer</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#journalWriter">journalWriter</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          final
+          LinkedHashMap&lt;String,&nbsp;DiskLruCache.Entry&gt;</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#lruEntries">lruEntries</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          long</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#maxSize">maxSize</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          long</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#nextSequenceNumber">nextSequenceNumber</a></td>
+          <td class="jd-descrcol" width="100%">To differentiate between old and current snapshots, each entry is given
+ a sequence number each time an edit is committed.</td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          int</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#redundantOpCount">redundantOpCount</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class="alt-color api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          
+          long</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#size">size</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+      <tr class=" api apilevel-" >
+          <td class="jd-typecol"><nobr>
+          private
+          
+          final
+          int</nobr></td>
+          <td class="jd-linkcol"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#valueCount">valueCount</a></td>
+          <td class="jd-descrcol" width="100%"></td>
+      </tr>
+      
+    
+
+</table>
+
+
+
+
+
+
+
+
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+<table id="pubmethods" class="jd-sumtable"><tr><th colspan="12">Public Methods</th></tr>
+
+
+
+         
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            synchronized
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#close()">close</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">Closes this cache.</div>
+  
+  </td></tr>
+
+
+         
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#delete()">delete</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">Closes the cache and deletes all of its stored values.</div>
+  
+  </td></tr>
+
+
+         
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            <a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.Editor.html">DiskLruCache.Editor</a></nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#edit(java.lang.String)">edit</a></span>(String key)</nobr>
+        
+        <div class="jd-descrdiv">Returns an editor for the entry named <code>key</code>, or null if another
+ edit is in progress.</div>
+  
+  </td></tr>
+
+
+         
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            synchronized
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#flush()">flush</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">Force buffered operations to the filesystem.</div>
+  
+  </td></tr>
+
+
+         
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            synchronized
+            
+            
+            
+            <a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.Snapshot.html">DiskLruCache.Snapshot</a></nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#get(java.lang.String)">get</a></span>(String key)</nobr>
+        
+        <div class="jd-descrdiv">Returns a snapshot of the entry named <code>key</code>, or null if it doesn't
+ exist is not currently readable.</div>
+  
+  </td></tr>
+
+
+         
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            File</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#getDirectory()">getDirectory</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">Returns the directory where this cache stores its data.</div>
+  
+  </td></tr>
+
+
+         
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            long</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#getMaxSize()">getMaxSize</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">Returns the maximum number of bytes that this cache should use to store
+ its data.</div>
+  
+  </td></tr>
+
+
+         
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            boolean</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#isClosed()">isClosed</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">Returns true if this cache has been closed.</div>
+  
+  </td></tr>
+
+
+         
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            static
+            
+            <a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html">DiskLruCache</a></nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#open(java.io.File, int, int, long)">open</a></span>(File directory, int appVersion, int valueCount, long maxSize)</nobr>
+        
+        <div class="jd-descrdiv">Opens the cache in <code>directory</code>, creating a cache if none exists
+ there.</div>
+  
+  </td></tr>
+
+
+         
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            synchronized
+            
+            
+            
+            boolean</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#remove(java.lang.String)">remove</a></span>(String key)</nobr>
+        
+        <div class="jd-descrdiv">Drops the entry for <code>key</code> if it exists and can be removed.</div>
+  
+  </td></tr>
+
+
+         
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            synchronized
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#setMaxSize(long)">setMaxSize</a></span>(long maxSize)</nobr>
+        
+        <div class="jd-descrdiv">Changes the maximum number of bytes the cache can store and queues a job
+ to trim the existing store, if necessary.</div>
+  
+  </td></tr>
+
+
+         
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            synchronized
+            
+            
+            
+            long</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad"><a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html#size()">size</a></span>()</nobr>
+        
+        <div class="jd-descrdiv">Returns the number of bytes currently being used to store the values in
+ this cache.</div>
+  
+  </td></tr>
+
+
+
+</table>
+
+
+
+
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+<table id="inhmethods" class="jd-sumtable"><tr><th>
+  <a href="#" class="toggle-all" onclick="return toggleAllInherited(this, null)">[Expand]</a>
+  <div style="clear:left;">Inherited Methods</div></th></tr>
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-java.lang.Object" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-java.lang.Object-trigger"
+          src="../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From class
+
+  java.lang.Object
+
+<div id="inherited-methods-java.lang.Object">
+  <div id="inherited-methods-java.lang.Object-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-java.lang.Object-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+         
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            Object</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">clone</span>()</nobr>
+        
+  </td></tr>
+
+
+         
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            boolean</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">equals</span>(Object arg0)</nobr>
+        
+  </td></tr>
+
+
+         
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">finalize</span>()</nobr>
+        
+  </td></tr>
+
+
+         
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            final
+            
+            
+            Class&lt;?&gt;</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">getClass</span>()</nobr>
+        
+  </td></tr>
+
+
+         
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            int</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">hashCode</span>()</nobr>
+        
+  </td></tr>
+
+
+         
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            final
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">notify</span>()</nobr>
+        
+  </td></tr>
+
+
+         
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            final
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">notifyAll</span>()</nobr>
+        
+  </td></tr>
+
+
+         
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            
+            
+            
+            String</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">toString</span>()</nobr>
+        
+  </td></tr>
+
+
+         
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            final
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">wait</span>()</nobr>
+        
+  </td></tr>
+
+
+         
+    <tr class=" api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            final
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">wait</span>(long arg0, int arg1)</nobr>
+        
+  </td></tr>
+
+
+         
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            
+            
+            final
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">wait</span>(long arg0)</nobr>
+        
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+
+<tr class="api apilevel-" >
+<td colspan="12">
+  <a href="#" onclick="return toggleInherited(this, null)" id="inherited-methods-java.io.Closeable" class="jd-expando-trigger closed"
+          ><img id="inherited-methods-java.io.Closeable-trigger"
+          src="../../../../assets/images/triangle-closed.png"
+          class="jd-expando-trigger-img" /></a>
+From interface
+
+  java.io.Closeable
+
+<div id="inherited-methods-java.io.Closeable">
+  <div id="inherited-methods-java.io.Closeable-list"
+        class="jd-inheritedlinks">
+  </div>
+  <div id="inherited-methods-java.io.Closeable-summary" style="display: none;">
+    <table class="jd-sumtable-expando">
+    
+
+
+         
+    <tr class="alt-color api apilevel-" >
+        <td class="jd-typecol"><nobr>
+            abstract
+            
+            
+            
+            
+            void</nobr>
+        </td>
+        <td class="jd-linkcol" width="100%"><nobr>
+        <span class="sympad">close</span>()</nobr>
+        
+  </td></tr>
+
+
+</table>
+  </div>
+</div>
+</td></tr>
+
+
+</table>
+
+
+</div><!-- jd-descr (summary) -->
+
+<!-- Details -->
+
+
+
+
+
+
+
+
+<!-- XML Attributes -->
+
+
+<!-- Enum Values -->
+
+
+<!-- Constants -->
+
+
+<!-- ========= ENUM CONSTANTS DETAIL ======== -->
+<h2>Constants</h2>
+
+
+
+
+<A NAME="ANY_SEQUENCE_NUMBER"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+         
+        static 
+        final 
+        long
+      </span>
+        ANY_SEQUENCE_NUMBER
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+        <div class="jd-tagdata">
+        <span class="jd-tagtitle">Constant Value: </span>
+        <span>
+            
+                -1
+                (0xffffffffffffffff)
+            
+        </span>
+        </div>
+    
+    </div>
+</div>
+
+
+
+<A NAME="CLEAN"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+        static 
+        final 
+        String
+      </span>
+        CLEAN
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+        <div class="jd-tagdata">
+        <span class="jd-tagtitle">Constant Value: </span>
+        <span>
+            
+                "CLEAN"
+            
+        </span>
+        </div>
+    
+    </div>
+</div>
+
+
+
+<A NAME="DIRTY"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+        static 
+        final 
+        String
+      </span>
+        DIRTY
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+        <div class="jd-tagdata">
+        <span class="jd-tagtitle">Constant Value: </span>
+        <span>
+            
+                "DIRTY"
+            
+        </span>
+        </div>
+    
+    </div>
+</div>
+
+
+
+<A NAME="JOURNAL_FILE"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+         
+        static 
+        final 
+        String
+      </span>
+        JOURNAL_FILE
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+        <div class="jd-tagdata">
+        <span class="jd-tagtitle">Constant Value: </span>
+        <span>
+            
+                "journal"
+            
+        </span>
+        </div>
+    
+    </div>
+</div>
+
+
+
+<A NAME="JOURNAL_FILE_BACKUP"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+         
+        static 
+        final 
+        String
+      </span>
+        JOURNAL_FILE_BACKUP
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+        <div class="jd-tagdata">
+        <span class="jd-tagtitle">Constant Value: </span>
+        <span>
+            
+                "journal.bkp"
+            
+        </span>
+        </div>
+    
+    </div>
+</div>
+
+
+
+<A NAME="JOURNAL_FILE_TEMP"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+         
+        static 
+        final 
+        String
+      </span>
+        JOURNAL_FILE_TEMP
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+        <div class="jd-tagdata">
+        <span class="jd-tagtitle">Constant Value: </span>
+        <span>
+            
+                "journal.tmp"
+            
+        </span>
+        </div>
+    
+    </div>
+</div>
+
+
+
+<A NAME="MAGIC"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+         
+        static 
+        final 
+        String
+      </span>
+        MAGIC
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+        <div class="jd-tagdata">
+        <span class="jd-tagtitle">Constant Value: </span>
+        <span>
+            
+                "libcore.io.DiskLruCache"
+            
+        </span>
+        </div>
+    
+    </div>
+</div>
+
+
+
+<A NAME="READ"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+        static 
+        final 
+        String
+      </span>
+        READ
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+        <div class="jd-tagdata">
+        <span class="jd-tagtitle">Constant Value: </span>
+        <span>
+            
+                "READ"
+            
+        </span>
+        </div>
+    
+    </div>
+</div>
+
+
+
+<A NAME="REMOVE"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+        static 
+        final 
+        String
+      </span>
+        REMOVE
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+        <div class="jd-tagdata">
+        <span class="jd-tagtitle">Constant Value: </span>
+        <span>
+            
+                "REMOVE"
+            
+        </span>
+        </div>
+    
+    </div>
+</div>
+
+
+
+<A NAME="VERSION_1"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+         
+        static 
+        final 
+        String
+      </span>
+        VERSION_1
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+        <div class="jd-tagdata">
+        <span class="jd-tagtitle">Constant Value: </span>
+        <span>
+            
+                "1"
+            
+        </span>
+        </div>
+    
+    </div>
+</div>
+
+
+
+
+<!-- Fields -->
+
+
+<!-- ========= FIELD DETAIL ======== -->
+<h2>Fields</h2>
+
+
+
+
+<A NAME="LEGAL_KEY_PATTERN"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+         
+        static 
+        final 
+        Pattern
+      </span>
+        LEGAL_KEY_PATTERN
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="NULL_OUTPUT_STREAM"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+        static 
+        final 
+        OutputStream
+      </span>
+        NULL_OUTPUT_STREAM
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="appVersion"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+        final 
+        int
+      </span>
+        appVersion
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="cleanupCallable"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+        final 
+        Callable&lt;Void&gt;
+      </span>
+        cleanupCallable
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="directory"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+        final 
+        File
+      </span>
+        directory
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="executorService"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+         
+         
+        final 
+        ThreadPoolExecutor
+      </span>
+        executorService
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>This cache uses a single background thread to evict entries. </p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="journalFile"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+        final 
+        File
+      </span>
+        journalFile
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="journalFileBackup"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+        final 
+        File
+      </span>
+        journalFileBackup
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="journalFileTmp"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+        final 
+        File
+      </span>
+        journalFileTmp
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="journalWriter"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        Writer
+      </span>
+        journalWriter
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="lruEntries"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+        final 
+        LinkedHashMap&lt;String,&nbsp;DiskLruCache.Entry&gt;
+      </span>
+        lruEntries
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="maxSize"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        long
+      </span>
+        maxSize
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="nextSequenceNumber"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        long
+      </span>
+        nextSequenceNumber
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>To differentiate between old and current snapshots, each entry is given
+ a sequence number each time an edit is committed. A snapshot is stale if
+ its sequence number is not equal to its entry's sequence number.
+</p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="redundantOpCount"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        int
+      </span>
+        redundantOpCount
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="size"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+         
+        long
+      </span>
+        size
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+<A NAME="valueCount"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        private 
+         
+        final 
+        int
+      </span>
+        valueCount
+    </h4>
+      <div class="api-level">
+        
+
+
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p></p></div>
+
+    
+    </div>
+</div>
+
+
+
+
+<!-- Public ctors -->
+
+
+
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<!-- Protected ctors -->
+
+
+
+<!-- ========= METHOD DETAIL ======== -->
+<!-- Public methdos -->
+
+<h2>Public Methods</h2>
+
+
+
+<A NAME="close()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+        synchronized 
+        void
+      </span>
+      <span class="sympad">close</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Closes this cache. Stored values will remain on the filesystem. </p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Throws</h5>
+      <table class="jd-tagtable">  
+        <tr>
+            <th>IOException</td>
+            <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="delete()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        void
+      </span>
+      <span class="sympad">delete</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Closes the cache and deletes all of its stored values. This will delete
+ all files in the cache directory including files that weren't created by
+ the cache.
+</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Throws</h5>
+      <table class="jd-tagtable">  
+        <tr>
+            <th>IOException</td>
+            <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="edit(java.lang.String)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        <a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.Editor.html">DiskLruCache.Editor</a>
+      </span>
+      <span class="sympad">edit</span>
+      <span class="normal">(String key)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Returns an editor for the entry named <code>key</code>, or null if another
+ edit is in progress.
+</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Throws</h5>
+      <table class="jd-tagtable">  
+        <tr>
+            <th>IOException</td>
+            <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="flush()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+        synchronized 
+        void
+      </span>
+      <span class="sympad">flush</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Force buffered operations to the filesystem. </p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Throws</h5>
+      <table class="jd-tagtable">  
+        <tr>
+            <th>IOException</td>
+            <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="get(java.lang.String)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+        synchronized 
+        <a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.Snapshot.html">DiskLruCache.Snapshot</a>
+      </span>
+      <span class="sympad">get</span>
+      <span class="normal">(String key)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Returns a snapshot of the entry named <code>key</code>, or null if it doesn't
+ exist is not currently readable. If a value is returned, it is moved to
+ the head of the LRU queue.
+</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Throws</h5>
+      <table class="jd-tagtable">  
+        <tr>
+            <th>IOException</td>
+            <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="getDirectory()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        File
+      </span>
+      <span class="sympad">getDirectory</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Returns the directory where this cache stores its data. </p></div>
+
+    </div>
+</div>
+
+
+<A NAME="getMaxSize()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        long
+      </span>
+      <span class="sympad">getMaxSize</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Returns the maximum number of bytes that this cache should use to store
+ its data.
+</p></div>
+
+    </div>
+</div>
+
+
+<A NAME="isClosed()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+         
+        boolean
+      </span>
+      <span class="sympad">isClosed</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Returns true if this cache has been closed. </p></div>
+
+    </div>
+</div>
+
+
+<A NAME="open(java.io.File, int, int, long)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+        static 
+         
+         
+         
+        <a href="../../../../reference/com/jakewharton/disklrucache/DiskLruCache.html">DiskLruCache</a>
+      </span>
+      <span class="sympad">open</span>
+      <span class="normal">(File directory, int appVersion, int valueCount, long maxSize)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Opens the cache in <code>directory</code>, creating a cache if none exists
+ there.</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Parameters</h5>
+      <table class="jd-tagtable">
+        <tr>
+          <th>directory</td>
+          <td>a writable directory</td>
+        </tr>
+        <tr>
+          <th>valueCount</td>
+          <td>the number of values per cache entry. Must be positive.</td>
+        </tr>
+        <tr>
+          <th>maxSize</td>
+          <td>the maximum number of bytes this cache should use to store</td>
+        </tr>
+      </table>
+  </div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Throws</h5>
+      <table class="jd-tagtable">  
+        <tr>
+            <th>IOException</td>
+            <td>if reading or writing the cache directory fails
+</td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="remove(java.lang.String)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+        synchronized 
+        boolean
+      </span>
+      <span class="sympad">remove</span>
+      <span class="normal">(String key)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Drops the entry for <code>key</code> if it exists and can be removed. Entries
+ actively being edited cannot be removed.</p></div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Returns</h5>
+      <ul class="nolist"><li>true if an entry was removed.
+</li></ul>
+  </div>
+  <div class="jd-tagdata">
+      <h5 class="jd-tagtitle">Throws</h5>
+      <table class="jd-tagtable">  
+        <tr>
+            <th>IOException</td>
+            <td></td>
+        </tr>
+      </table>
+  </div>
+
+    </div>
+</div>
+
+
+<A NAME="setMaxSize(long)"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+        synchronized 
+        void
+      </span>
+      <span class="sympad">setMaxSize</span>
+      <span class="normal">(long maxSize)</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Changes the maximum number of bytes the cache can store and queues a job
+ to trim the existing store, if necessary.
+</p></div>
+
+    </div>
+</div>
+
+
+<A NAME="size()"></A>
+
+<div class="jd-details api apilevel-"> 
+    <h4 class="jd-details-title">
+      <span class="normal">
+        public 
+         
+         
+         
+        synchronized 
+        long
+      </span>
+      <span class="sympad">size</span>
+      <span class="normal">()</span>
+    </h4>
+      <div class="api-level">
+        <div>
+
+</div>
+        
+  
+
+      </div>
+    <div class="jd-details-descr">
+      
+  <div class="jd-tagdata jd-tagdescr"><p>Returns the number of bytes currently being used to store the values in
+ this cache. This may be greater than the max size if a background
+ deletion is pending.
+</p></div>
+
+    </div>
+</div>
+
+
+
+
+
+<!-- ========= METHOD DETAIL ======== -->
+
+
+
+<!-- ========= END OF CLASS DATA ========= -->
+<A NAME="navbar_top"></A>
+
+<div id="footer" class="wrap" >
+        
+
+  <div id="copyright">
+    
+  Except as noted, this content is licensed under <a
+  href="http://www.apache.org/licenses/LICENSE-2.0">Apache 2.0</a>. 
+  For details and restrictions, see the <a href="../../../../license.html">
+  Content License</a>.
+  </div>
+  <div id="build_info">
+    
+  Java API Level 
+   - 
+
+  </div>
+
+
+  <div id="footerlinks">
+    
+  <p>
+    <a href="../../../../about/index.html">About the Project</a>&nbsp;&nbsp;|&nbsp;
+    <a href="../../../../legal.html">Legal</a>&nbsp;&nbsp;|&nbsp;
+    <a href="../../../../support.html">Support</a>
+  </p>
+  </div>
+
+</div> <!-- end footer -->
+
+</div> <!-- jd-content -->
+
+</div><!-- end doc-content -->
+
+</div> <!-- end body-content --> 
+
+
+
+
+<!-- Grid - for dev 
+<script type="text/javascript">
+
+window.gOverride = {
+                gColor: '#FF0000',
+                pColor: '#EEEEEE',
+                gOpacity: 0.10,
+                pOpacity: 0.40,
+                pHeight: 16,
+                pOffset: 2,
+                gColumns:16,
+                gEnabled:false,
+                pEnabled:false
+        }
+</script>
+        
+<link href="../../../../assets/js/grid/960.gridder.css" rel="stylesheet" type="text/css">
+<script src="../../../../assets/js/grid/960.gridder.js" type="text/javascript"></script>
+-->
+
+
+
+
+
+<script type="text/javascript">
+init(); /* initialize android-developer-docs.js */
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+
+<!-- Put your own Google track api key here-->
+<script type="text/javascript">
+  var pageTracker = _gat._getTracker("");
+  pageTracker._trackPageview();
+</script>
+
+
+
+</body>
+</html>
