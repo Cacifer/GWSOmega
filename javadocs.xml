@@ -10,7 +10,9 @@
                    
      fredgrott                                                                
      ====================================================================== -->
-<project name="GWSOmega" default="default">
+<project name="GWSOmega" default="default"
+	xmlns:oja="jwaresoftware.antxtras" 
+	xmlns:emit="jwaresoftware.log4ant">
     <description>
             javadocs gen build script
     </description>
@@ -35,6 +37,23 @@
             <include name="ivy-2.3.0.jar"/>
          </fileset>
     </path>
+	<!-- Location of Log4Ant antlib and thirdparty files,
+	         note in log4ant example they missuse dirname poiting to 
+	         dir with file which will not produce the expected result -->
+	      <path id="ourjware.path">
+	            <fileset dir="${build.config.dir}/ant.bootstrap/dep">
+	                <include name="*/lib/*.jar"/>
+	            </fileset>
+	        <fileset dir="${build.config.dir}/ant.bootstrap">
+	             <include name="jw-log4ant.jar"/>
+	            <include name="logback-access-1.0.9.jar"/>
+	            <include name="logback-core-1.0.9.jar"/>
+	            <include name="logback-classic-1.0.9.jar"/>
+	         </fileset>
+	    <pathelement 
+	      location="${build.config.dir}/ant.bootstrap/etc"/>
+	  </path>
+
 	
 	<taskdef resource="org/apache/ivy/ant/antlib.xml"
 	         uri="antlib:org.apache.ivy.ant" classpathref="apache.ivy.path"/>
@@ -44,6 +63,31 @@
 	classpathref="apache.ivy.path"/>
 	<taskdef name="cachepath" classname="org.apache.ivy.ant.IvyCachePath"
 	classpathref="apache.ivy.path"/>
+	<!-- load all antxtra libs taskdefs -->
+	    <taskdef uri="jwaresoftware.antxtras"
+	         resource="org/jwaresoftware/antxtras/install/antlib-advanced.xml"
+	         classpathref="ourjware.path"
+	         loaderref="jware.classloader"/>
+	    
+	    <taskdef uri="jwaresoftware.log4ant"
+	         resource="org/jwaresoftware/log4ant/install/antlib.xml"
+	         loaderref="jware.classloader"/>
+	    
+	    <!-- Wraps errors up to output and my logback.xml is set to 
+	         use mdc to print out the target and task during ticks so 
+	         we use less ant macros to wrap the tasks inside targets -->
+	    <presetdef name="wrap">
+	       <oja:protect>
+	          <oja:iferror capturethrown="last.error">
+	             <emit:show messageid="E.something.failed" level="error">
+	                <include thrown="last.error"/>
+	             </emit:show>
+	             <oja:unassign reference="last.error"/>
+	          </oja:iferror>
+	       </oja:protect>
+	    </presetdef>  
+	 
+	    
 	
 	<path id="our.android.jar.path">
 	 <pathelement location="${javahome}/jre/lib/rt.jar"/>
@@ -56,6 +100,21 @@
              </fileset>
 
 	</path>
+	
+
+	<target name="-init" description="-init">
+	
+		<oja:vendorinfo name="antxtras"/>
+		<oja:show message="AntXtras: ${antxtras.build.label}"/>
+		     
+		<emit:libcheck/>
+		<emit:show message="${log4ant.label}"/> 
+	    <emit:show message="${slf4j.label}"/>
+		<emit:show message="${slf4j-impl.label}"/>
+	</target>
+	
+	
+	
    <target name="-ivyprep" description="ivy prep">
    	<!-- Easiest way to set this up is to organize by 
    	     confs for the ant paths. That means you do a 
@@ -75,6 +134,7 @@
    	</target>
 	
 	<target name="-javadocs" description="javadocs">
+		<wrap>
 		<javadoc packagenames="*.*.*"
 		           destdir="${basedir}/docs"
 		           sourcepath="src:gen"
@@ -98,13 +158,14 @@
 		        
 		      </doclet>
 		    </javadoc>
+			</wrap>
 	</target>
 
 
     <!-- ================================= 
           target: default              
          ================================= -->
-    <target name="default" depends="depends" description="javadocs gen build script">
+    <target name="default" depends="-init, -ivyprep, -javadocs" description="javadocs gen build script">
         
     </target>
 
