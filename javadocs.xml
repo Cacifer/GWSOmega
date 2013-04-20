@@ -139,6 +139,14 @@
 		           docletpath="${doclava.jar}"
 		           bootclasspathref="our.android.jar.path"
 		           >
+			<!-- -werror sets all doclava warnings to errors 
+			     and thus javadoc generation stops. 
+			     -error number will turn one warning into 
+			     an error and stop the javadoc generation
+			     -warning number
+			     -hide number 
+			     turn one thing into a warning or 
+			     hide the issue. -->
 		      <doclet name="com.google.doclava.Doclava">
 		        <param name="-stubs" value="bin/stubs" />
 		      	<!-- embedding javadocs in website parameters-->
@@ -149,13 +157,27 @@
 		      	<!-- hdf parameters -->
 		        <param name="-hdf"/> <param name="project.name"/> <param name="${ant.project.name}"/>
 		        <!-- versioning -->
-		        
+		      	<!--<param name="-since"/> <param name="doclava/previous.xml"/> <param name="v1" />
+		      	        <param name="-apiversion" value="v2"/>-->
 		        <!-- federation -->
-		        
+		      	<!--<param name="-federate" /><param name="JDK"/>
+		      	        <param name="http://download.oracle.com/javase/6/docs/api/index.html?"/>
+		      	        <param name="-federationxml"/><param name="JDK"/>
+		      	        <param name="http://doclava.googlecode.com/svn/static/api/openjdk-6.xml"/>-->
 		        
 		      </doclet>
 		    </javadoc>
 			</wrap>
+	</target>
+	
+	<target name="-umlimages">
+	
+		<!-- generate uml images for the javadocs generated in 
+		     the -javadocs task -->
+		<wrap>
+		
+		</wrap>
+		
 	</target>
 
 
