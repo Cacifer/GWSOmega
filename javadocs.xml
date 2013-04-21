@@ -7,6 +7,24 @@
      
      Look folks I run this inside an IDE, do not try this 
      outside of an IDE..please
+     
+     
+     Background:
+     
+     -The android ant build scripts and ant tasks put project libs
+      in the libs folder.
+     -ivy when it retrieves artefacts puts them first in a local
+      cache at user.home/.ivy2 and than copies them over to a 
+      project lib folder according to an artefact pattern that is
+      specificied in the retrieve task.
+      
+      Because we use multiple projects as sub modules for android 
+      application development we need to direct ivy to retrieve and 
+      place a copy of the artefact in the project lib folder.
+      
+      Our setup is that we prepared a local ivy repo in user.home/.ivys/local
+      thus we need no ivysettings.xml file setup in our project.
+      
                    
      fredgrott                                                                
      ====================================================================== -->
@@ -17,11 +35,15 @@
     <description>
             javadocs gen build script
     </description>
-	
+	<!-- retrieve system environment properties -->
 	<property environment="env"/>
+	<!-- set default datetime properties -->
 	<tstamp/>
+	<!-- platform specific path separator-->
 	<property name="ps" value="${path.separator}"/>
+	<!-- load project.properties file-->
 	<property file="project.properties"/>
+	<!-- load local.properties file -->
 	<property file="local.properties"/>
 	<property name="build.config.dir" location="${basedir}/build.config"/>
 	<property name="ant.task.jars.dir" location="${build.config.dir}/ant"/>
@@ -36,7 +58,7 @@
 	<property name="temp.ydoc.out.dir" location="${basedir}/bin/tempydoc"/>
 	<property name="doclava.templatedir" location="${doclava.config.dir}/assets/templates"/>
 	<property name="doclava.htmldir" location="${doclava.config.dir}/htmldir"/>
-	<property name="android.platorm.jar" location="${sdk.dir}/platforms/${target}/android.jar"/>
+	<property name="android.platform.jar" location="${sdk.dir}/platforms/${target}/android.jar"/>
 	
 	<path id="apache.ivy.path">
          <fileset dir="${ant,task.bootstrap.jar.dir}" >
@@ -92,7 +114,7 @@
 	
 	<path id="our.android.jar.path">
 	 <pathelement location="${javahome}/jre/lib/rt.jar"/>
-		<pathelement location="${android.platorm.jar}"/>
+		<pathelement location="${android.platform.jar}"/>
    </path>
 	<path id="our.project.libs.path">
 	       <fileset dir="${basedir}/libs" >
@@ -117,23 +139,16 @@
 	
 	
    <target name="-ivyprep" description="ivy prep">
-   	<!-- Easiest way to set this up is to organize by 
-   	     confs for the ant paths. That means you do a 
-   	     little more work in organizing the ivy confs 
-   	     when setting up the ivy repo but it reduces 
-   	     a lot of work. 
+   	<!-- keep it simple do a retrieve and cachepath it
+   	     that avoids needless copying
    	     
-   	     globmapper is used to map specific jars to specific
-   	     jar filesot simplify soem jarlocations.
+   	     results is jars copied to lib folder
+   	     from user.home/.ivy2 after a repo is checked
+   	     with pattern [artifact].[revision].[ext]
    	     -->
-   	<ivy:resolve file="${basedir}/ivy.xml"/>
-   	   <ivy:retrieve pattern="${basedir}/lib/[conf]/[artifact].[ext]">
-   	   <globmapper from="${basedir}/lib/doclet/gwsdroidlava-*.jar" 
-   	   	to="${basedir}/lib/doclet/gwsdroidlava.jar" />
-   	  </ivy:retrieve>
+   	<ivy:retrieve/>
    	<ivy:cachepath pathid="doclet.classpath" conf="doclet" />
-   	<property name="doclava.jar" location="${basedir}/lib/doclet/gwsdroidlava.jar"/>
-   	<property name="yuml.jar" location="${basedir}/lib/doclet/ydoc.jar"/>
+   	
    	</target>
 	
 	<target name="-javadocs" description="javadocs">
@@ -142,7 +157,7 @@
 		           destdir="${basedir}/docs"
 		           sourcepath="src${ps}gen"
 			       classpathref="our.project.libs.path"
-		           docletpath="${doclava.jar}"
+		           docletpathref="doclet.classpath"
 		           bootclasspathref="our.android.jar.path"
 		           >
 			<!-- -werror sets all doclava warnings to errors 
@@ -186,18 +201,19 @@
 			            destdir="${basedir}/bin/tempydoc"
 				        classpathref="our.project.libs.path"
 				        bootclasspathref="our.android.jar.path"
+				        docletpathref="doclet.classpath"
 			            additionalparam="-breakiterator">
 			            <packageset dir="src">
 			                <include name="**"/>
 			            </packageset>
 			            <doclet
 			                name="ydoc.doclets.YStandard"
-			                path="${yuml.jar}{ps}${yuml.resources}${ps}${basedir}/bin/classes">
+			                path="${yuml.resources}${ps}${basedir}/bin/classes">
 			                <param name="-author"/>
 			                <param name="-generic"/>
 			                <param name="-umlautogen"/>
-			                <param name="-filterpath" value="${yuml.jar}"/>
-			                <param name="-filter"     value="ydoc.filters.ExcludeFilter"/>
+			                
+			                
 			                <param name="-tag" value="y.precondition"/>
 			                <param name="-tag" value="y.postcondition"/>
 			                <param name="-tag" value="y.complexity"/>
