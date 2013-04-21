@@ -223,6 +223,13 @@
 			                <param name="-tag" value="y.uml"/>
 			            </doclet>
 			        </javadoc>
+			<!-- copy uml images to javadocs folder-->
+			<copy todir="${basedir}/docs/reference">
+			    <fileset dir="${basedir}/bin/tempydoc">
+			      <include name="**/*.png"/>
+			    </fileset>
+			  </copy>
+			
 		</wrap>
 		
 	</target>

@@ -45,7 +45,7 @@ page.metaDescription=The Official Project Site for GWSDroidLava.
     <!-- Section links -->
     <div class="home-sections">
         <ul>
-            <li><a href="{@docRoot}about/index.html">GWSDroidLava</a></li>
+            <li><a href="{@docRoot}about/index.html">GWSOmega</a></li>
             
             <li><a href="{@docRoot}foss/index.html">FOSS</a></li>
             <li><a href="{@docRoot}support.html">Support</a></li>
