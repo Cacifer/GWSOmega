@@ -29,5 +29,6 @@
 	</configurations>
 	<dependencies>
 	     <dependency org="gws.grottworkshop" name="gwsdroidlava" rev="1.0" conf="doclet"/>
+	     <dependency org="ydoc" name="ydoc" rev="3.0.02"conf="doclet"/>
 	</dependencies>
 </ivy-module>

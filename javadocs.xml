@@ -20,6 +20,7 @@
 	
 	<property environment="env"/>
 	<tstamp/>
+	<property name="ps" value="${path.separator}"/>
 	<property file="project.properties"/>
 	<property file="local.properties"/>
 	<property name="build.config.dir" location="${basedir}/build.config"/>
@@ -27,8 +28,12 @@
 	<property name="ant,task.bootstrap.jar.dir" location="${build.config.dir}/ant.bootstrap"/>
 	<property name="doclets.jars.dir" location="${build.config.dir}/doclets/doclets.jars"/>
 	<property name="doclava.config.dir" location="${build.config.dir}/doclets/doclava.config"/>
+	<property name="yuml.config.dir" location="${build.config.dir}/doclets/yuml.config"/>
+	<property name="yuml.resources" location="${yuml.config.dir}/resources"/>
 	<mkdir dir="${basedir}/docs/getit"/>
 	<mkdir dir="${basedir}/lib"/>
+	<mkdir dir="${basedir}/bin/tempydoc"/>
+	<property name="temp.ydoc.out.dir" location="${basedir}/bin/tempydoc"/>
 	<property name="doclava.templatedir" location="${doclava.config.dir}/assets/templates"/>
 	<property name="doclava.htmldir" location="${doclava.config.dir}/htmldir"/>
 	<property name="android.platorm.jar" location="${sdk.dir}/platforms/${target}/android.jar"/>
@@ -128,13 +133,14 @@
    	  </ivy:retrieve>
    	<ivy:cachepath pathid="doclet.classpath" conf="doclet" />
    	<property name="doclava.jar" location="${basedir}/lib/doclet/gwsdroidlava.jar"/>
+   	<property name="yuml.jar" location="${basedir}/lib/doclet/ydoc.jar"/>
    	</target>
 	
 	<target name="-javadocs" description="javadocs">
 		<wrap>
 		<javadoc packagenames="*.*.*"
 		           destdir="${basedir}/docs"
-		           sourcepath="src:gen"
+		           sourcepath="src${ps}gen"
 			       classpathref="our.project.libs.path"
 		           docletpath="${doclava.jar}"
 		           bootclasspathref="our.android.jar.path"
@@ -175,7 +181,32 @@
 		<!-- generate uml images for the javadocs generated in 
 		     the -javadocs task -->
 		<wrap>
-		
+			<javadoc
+			            source="1.6"
+			            destdir="${basedir}/bin/tempydoc"
+				        classpathref="our.project.libs.path"
+				        bootclasspathref="our.android.jar.path"
+			            additionalparam="-breakiterator">
+			            <packageset dir="src">
+			                <include name="**"/>
+			            </packageset>
+			            <doclet
+			                name="ydoc.doclets.YStandard"
+			                path="${yuml.jar}{ps}${yuml.resources}${ps}${basedir}/bin/classes">
+			                <param name="-author"/>
+			                <param name="-generic"/>
+			                <param name="-umlautogen"/>
+			                <param name="-filterpath" value="${yuml.jar}"/>
+			                <param name="-filter"     value="ydoc.filters.ExcludeFilter"/>
+			                <param name="-tag" value="y.precondition"/>
+			                <param name="-tag" value="y.postcondition"/>
+			                <param name="-tag" value="y.complexity"/>
+			                <param name="-tag" value="param"/>
+			                <param name="-tag" value="return"/>
+			                <param name="-tag" value="see"/>
+			                <param name="-tag" value="y.uml"/>
+			            </doclet>
+			        </javadoc>
 		</wrap>
 		
 	</target>
@@ -184,7 +215,7 @@
     <!-- ================================= 
           target: default              
          ================================= -->
-    <target name="default" depends="-init, -ivyprep, -javadocs" description="javadocs gen build script">
+    <target name="default" depends="-init, -ivyprep, -javadocs, -umlimages" description="javadocs gen build script">
         
     </target>
 
