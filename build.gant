@@ -1,0 +1,35 @@
+// Just a simple way to make a transfer from
+// ant to gradle by doing gant build files first
+// Apache 2.0 License
+// 2013 author: Fred Grott-GrottWorkshop
+//  http://about.me/fredgrott
+// mention if you use or modify
+includeTool << gant.tools.Ivy
+
+def buildDir = "bin"
+def classesDir = "${buildDir}/classes"
+def buildTempYdocDir = "${buildDir}/tempydoc"
+def buildDroidLavaStubsDir = "${buildDir}/stubs"
+def sourceDir = "src"
+def genDir = "gen"
+def assetsDir = "assets"
+def resDir ="res"
+def docsDir = "docs"
+def libDir  = "lib"
+def androidLibsDir = "libs"
+def buildConfigDir = "build.config"
+def doclavaConfigDir = "${buildConfigDir}/doclets/doclava.config"
+def doclavaTemplateDir = "${doclavaConfigDir}/assets/templates"
+def doclavaHtmlDir = "${doclavaConfigDir}/htmldir"
+def yumlConfigDir = "${buildConfigDir}/doclets/ydoc.config"
+def yumlResourcesDir = "${yumlConfigDir}/resources"
+
+property ( file : 'local.properties' )
+property ( file : 'project.properties' )
+
+ant.property(environment: 'env')
+ant.tstamp(){
+	format(property:"BUILD.DATE",pattern:"yyyy-MM-dd'T'HHmmss")
+  }
+
+
