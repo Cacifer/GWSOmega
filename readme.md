@@ -32,6 +32,11 @@ Hence this library is using the 2nd technique.
 
 [AndroidBitmapcache-Chris Banes]('https://github.com/chrisbanes/Android-BitmapCache')
 
+[Salvage-Jake Wharton]('https://github.com/JakeWharton/salvage')
+
+[ActionBarComat-Johan Nilsson ]('https://github.com/johannilsson/android-actionbar')
+
+[ActivityCompat2-Jake Wharton]('https://github.com/JakeWharton/ActivityCompat2')
 
 # Credits
 
