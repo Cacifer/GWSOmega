@@ -30,7 +30,8 @@ public class RecycleBin {
 
   private SparseArray<View> currentScrapViews;
 
-  public void setViewTypeCount(int viewTypeCount) {
+  @SuppressWarnings("unchecked")
+public void setViewTypeCount(int viewTypeCount) {
     if (viewTypeCount < 1) {
       throw new IllegalArgumentException("Can't have a viewTypeCount < 1");
     }

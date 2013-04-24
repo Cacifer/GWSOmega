@@ -38,6 +38,16 @@ Hence this library is using the 2nd technique.
 
 [ActivityCompat2-Jake Wharton]('https://github.com/JakeWharton/ActivityCompat2')
 
+[Hansel and Gretel-Jake Wharton]('https://github.com/JakeWharton/HanselAndGretel')
+
+[NineOldAndroids-Jake Wharton]('https://github.com/JakeWharton/NineOldAndroids')
+
+[Snooker-Jake Wharton]('https://github.com/JakeWharton/snooker')
+
+[ViewpageIndicator-jake Wharton]('https://github.com/JakeWharton/Android-ViewPagerIndicator')
+
+
+
 # Credits
 
 
