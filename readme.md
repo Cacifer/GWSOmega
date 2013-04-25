@@ -46,7 +46,9 @@ Hence this library is using the 2nd technique.
 
 [ViewpageIndicator-jake Wharton]('https://github.com/JakeWharton/Android-ViewPagerIndicator')
 
+[AndroidStackedView-EdisonWang]('https://github.com/edisonw/Android-StackedView')
 
+[AndridGridLayout-DanielLew]('https://github.com/dlew/android-gridlayout')
 
 # Credits
 
