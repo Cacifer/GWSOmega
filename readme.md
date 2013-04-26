@@ -50,6 +50,33 @@ Hence this library is using the 2nd technique.
 
 [AndridGridLayout-DanielLew]('https://github.com/dlew/android-gridlayout')
 
+[ReflectiveDrawaelLoader-Alexandros Schillings]('https://github.com/alt236/Reflective-Drawable-Loader---Android')
+
+[AndroidHelpViewPager-goodev]('https://github.com/goodev/Android-HelpViewPager')
+
+[Crouton-Benjamin Weiss]('https://github.com/keyboardsurfer/Crouton')
+
+[AndroidProgressFramework-Evgeny Shishkin]('https://github.com/johnkil/Android-ProgressFragment')
+
+[AndroidSlidingLyaerLibrary-6Wunderkinder]('https://github.com/6wunderkinder/android-sliding-layer-lib')
+
+[TabCarouselLib-adneal]('https://bitbucket.org/adneal/tabcarousellib')
+
+[ChipsEditTextLibrary-kpbird]('https://github.com/kpbird/chips-edittext-library')
+
+[GestureImageView-JasonPolites]('https://github.com/jasonpolites/gesture-imageview')
+
+[Inscription-MartinvanZ]('https://github.com/MartinvanZ/Inscription')
+
+[DragSortListView-Carl A. Bauer]('https://github.com/bauerca/drag-sort-listview')
+
+[PhotoView-ChrisBanes]('https://github.com/chrisbanes/PhotoView')
+
+[AndroidWheel-Alessandro Crugnola]('https://github.com/sephiroth74/AndroidWheel')
+
+
+
+
 # Credits
 
 

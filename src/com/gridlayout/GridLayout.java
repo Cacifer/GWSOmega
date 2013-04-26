@@ -1836,7 +1836,8 @@ public class GridLayout extends ViewGroup {
         }
     }
 
-    final static class Assoc<K, V> extends ArrayList<Pair<K, V>> {
+    @SuppressWarnings("serial")
+	final static class Assoc<K, V> extends ArrayList<Pair<K, V>> {
         private final Class<K> keyType;
         private final Class<V> valueType;
 
@@ -2432,7 +2433,8 @@ public class GridLayout extends ViewGroup {
             this.second = second;
         }
 
-        public boolean equals(Object o) {
+        @SuppressWarnings("unchecked")
+		public boolean equals(Object o) {
             if (o == this)
                 return true;
             if (!(o instanceof Pair))
