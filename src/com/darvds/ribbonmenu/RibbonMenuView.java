@@ -24,7 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.darvds.ribbonmenu.RibbonMenuView.SavedState;
+
 
 public class RibbonMenuView extends LinearLayout {
 

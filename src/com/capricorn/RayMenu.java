@@ -32,6 +32,7 @@ public class RayMenu extends RelativeLayout {
 		init(context);
 	}
 
+	@SuppressWarnings("deprecation")
 	private void init(Context context) {
 		setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
 		setClipChildren(false);

@@ -26,6 +26,10 @@ Hence this library is using the 2nd technique.
 # Code
 
 # Components
+
+All components are their authors creation and licensed under their choice of license, 
+modifications are however mine and licensed under Apache 2.0 License.
+
 [DiskLruCache-JakeWharton]('https://github.com/JakeWharton/DiskLruCache')
 
 [TwoLevelLrucache-wuman]('https://github.com/wuman/TwoLevelLruCache')
@@ -87,6 +91,22 @@ Hence this library is using the 2nd technique.
 [AndroidNumberPicker-SimonVig Therkildsen]('https://github.com/SimonVT/android-numberpicker')
 
 [AndroidDatePicker-Simon Vig Therkildsen]('https://github.com/SimonVT/android-datepicker')
+
+[AndroidTimePicker-Simon Vig Therkildsen]('https://github.com/SimonVT/android-timepicker')
+
+[SlidingMenu-Jeremy Feinstein]('https://github.com/jfeinstein10/SlidingMenu')
+
+[JazzyViewPager-JeremyFeinstein]('https://github.com/jfeinstein10/JazzyViewPager')
+
+[StaggeredGridView-Maurycy Wojtowicz]('https://github.com/maurycyw/StaggeredGridView')
+
+[QuiltViewLibrary-Jacob Moncur]('https://github.com/jacobmoncur/QuiltViewLibrary')
+
+[ListViewAnimations-nhaarman]('https://github.com/nhaarman/ListViewAnimations')
+
+[AndroidSlideExpandableListView-Tjerk Wolterink]('https://github.com/tjerkw/Android-SlideExpandableListView')
+
+[IconicTextView-Artur Termenji]('https://github.com/atermenji/IconicTextView')
 
 # Credits
 

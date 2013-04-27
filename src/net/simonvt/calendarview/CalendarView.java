@@ -1037,7 +1037,8 @@ public class CalendarView extends FrameLayout {
     /**
      * Sets up the strings to be used by the header.
      */
-    private void setUpHeader() {
+    @SuppressWarnings("deprecation")
+	private void setUpHeader() {
         mDayLabels = new String[mDaysPerWeek];
         for (int i = mFirstDayOfWeek, count = mFirstDayOfWeek + mDaysPerWeek; i < count; i++) {
             int calendarDay = (i > Calendar.SATURDAY) ? i - Calendar.SATURDAY : i;

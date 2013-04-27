@@ -861,7 +861,8 @@ public class NumberPicker extends LinearLayout {
         return false;
     }
 
-    @Override
+    @SuppressWarnings("unused")
+	@Override
     public boolean onTouchEvent(MotionEvent event) {
         if (!isEnabled() || !mHasSelectorWheel) {
             return false;

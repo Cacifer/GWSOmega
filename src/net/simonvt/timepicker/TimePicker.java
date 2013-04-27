@@ -21,7 +21,7 @@ import net.simonvt.numberpicker.NumberPicker;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.Configuration;
-import android.content.res.TypedArray;
+
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -345,7 +345,7 @@ public class TimePicker extends FrameLayout {
             dest.writeInt(mMinute);
         }
 
-        @SuppressWarnings({"unused", "hiding"})
+        @SuppressWarnings({"unused"})
         public static final Parcelable.Creator<SavedState> CREATOR = new Creator<SavedState>() {
             public SavedState createFromParcel(Parcel in) {
                 return new SavedState(in);
@@ -475,7 +475,8 @@ public class TimePicker extends FrameLayout {
         return true;
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     public void onPopulateAccessibilityEvent(AccessibilityEvent event) {
         super.onPopulateAccessibilityEvent(event);
 
@@ -543,7 +544,8 @@ public class TimePicker extends FrameLayout {
         }
     }
 
-    private void setContentDescriptions() {
+    @SuppressWarnings("unused")
+	private void setContentDescriptions() {
         if (true) return; // This is never reached anyway, backport doesn't have increment/decrement buttons
         // Minute
         trySetContentDescription(mMinuteSpinner, R.id.np__increment,

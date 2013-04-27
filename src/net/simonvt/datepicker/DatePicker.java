@@ -48,7 +48,7 @@ import gws.grottworkshop.gwsomega.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
+
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -154,7 +154,8 @@ public class DatePicker extends FrameLayout {
         this(context, attrs, R.attr.datePickerStyle);
     }
 
-    public DatePicker(Context context, AttributeSet attrs, int defStyle) {
+    @SuppressWarnings("deprecation")
+	public DatePicker(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
         // initialization based on locale
@@ -473,7 +474,8 @@ public class DatePicker extends FrameLayout {
      *
      * @param locale The current locale.
      */
-    private void setCurrentLocale(Locale locale) {
+    @SuppressWarnings("deprecation")
+	private void setCurrentLocale(Locale locale) {
         if (locale.equals(mCurrentLocale)) {
             return;
         }
@@ -727,7 +729,8 @@ public class DatePicker extends FrameLayout {
         input.setImeOptions(imeOptions);
     }
 
-    private void setContentDescriptions() {
+    @SuppressWarnings("unused")
+	private void setContentDescriptions() {
         if (true) return; // increment/decrement buttons don't exist in backport
         // Day
         trySetContentDescription(mDaySpinner, R.id.np__increment,
