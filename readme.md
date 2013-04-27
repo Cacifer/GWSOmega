@@ -78,6 +78,15 @@ Hence this library is using the 2nd technique.
 
 [ArcMenu-daCapricorn]('https://github.com/daCapricorn/ArcMenu')
 
+[RibbonMenu-David Scott]('https://github.com/darvds/RibbonMenu')
+
+[QuickReturnlistView-Lars Werkman]('https://github.com/LarsWerkman/QuickReturnListView')
+
+[AndroidCalendarView-Simon Vig Therkildsen]('https://github.com/SimonVT/android-calendarview')
+
+[AndroidNumberPicker-SimonVig Therkildsen]('https://github.com/SimonVT/android-numberpicker')
+
+[AndroidDatePicker-Simon Vig Therkildsen]('https://github.com/SimonVT/android-datepicker')
 
 # Credits
 
