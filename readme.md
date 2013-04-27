@@ -74,7 +74,9 @@ Hence this library is using the 2nd technique.
 
 [AndroidWheel-Alessandro Crugnola]('https://github.com/sephiroth74/AndroidWheel')
 
+[AndroidSwitchBackport-Benoit Lubek]('https://github.com/BoD/android-switch-backport')
 
+[ArcMenu-daCapricorn]('https://github.com/daCapricorn/ArcMenu')
 
 
 # Credits
