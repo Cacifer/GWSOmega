@@ -138,6 +138,10 @@ modifications are however mine and licensed under Apache 2.0 License.
 
 [logbackandroid-tony19]('https://github.com/tony19/logback-android')
 
+[AndroidGestureListView-Arnaud Bos]('https://github.com/arnaudbos/Android-GestureListView')
+
+[AndroidPullToRefresh-Johan Nilsson]('https://github.com/johannilsson/android-pulltorefresh')
+
 # Credits
 
 
