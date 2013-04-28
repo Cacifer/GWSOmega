@@ -130,6 +130,13 @@ modifications are however mine and licensed under Apache 2.0 License.
 
 [AndroidGestureDetectors-Almeros]('https://github.com/Almeros/android-gesture-detectors')
 
+[HttpResponseCache-Craig]('https://github.com/candrews/HttpResponseCache')
+
+[AndroidAsyncHttp-Loopj]('https://github.com/loopj/android-async-http')
+
+[OkHttp-Square]('https://github.com/square/okhttp')
+
+[logbackandroid-tony19]('https://github.com/tony19/logback-android')
 
 # Credits
 
