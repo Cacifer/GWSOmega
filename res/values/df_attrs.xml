@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <attr name="formItemHeight" format="dimension" />
+    <declare-styleable name="AbsTextFormItem">
+        <attr name="dfinternalLayout" format="reference" />
+        <attr name="mandatory" format="boolean" />
+        <attr name="regex" format="string" />
+        <attr name="regexDescription" format="string" />
+        <attr name="minChars" format="integer" />
+        <attr name="maxChars" format="integer" />
+        <attr name="caseSensitive" format="boolean" />
+        <attr name="labelText" format="string" />
+        <attr name="useSiblingLabel" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="TextFormItem">
+        <attr name="validationErrorIcon" format="reference" />
+    </declare-styleable>
+    <attr name="absTextFormItemStyle" format="reference" />
+    <attr name="textFormItemStyle" format="reference" />
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="default_regex_description">no tiene un formato correcto</string>
+    <string name="field_is_mandatory">es obligatorio</string>
+    <string name="field_is_too_short">debe contener al menos %1$d caracteres</string>
+    <string name="field_is_too_long">no puede contener más de %1$d caracteres</string>
+    <string name="error_message_first_part">El campo %s</string>
+</resources>

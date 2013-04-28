@@ -1,0 +1,9 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <style name="AbsTextFormItem">
+        <item name="internalLayout">@layout/df_form_item</item>
+        <item name="regexDescription">@string/default_regex_description</item>
+    </style>
+    <style name="TextFormItem" parent="AbsTextFormItem">
+        <item name="validationErrorIcon">@android:drawable/ic_dialog_alert</item>
+    </style>
+</resources>

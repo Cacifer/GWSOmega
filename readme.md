@@ -108,6 +108,22 @@ modifications are however mine and licensed under Apache 2.0 License.
 
 [IconicTextView-Artur Termenji]('https://github.com/atermenji/IconicTextView')
 
+[AndroidGridViewCompatLibrary-paramvir-b]('https://github.com/paramvir-b/AndroidGridViewCompatLib')
+
+[MultiSelectListPreferenceCompat-h6ah4i]('https://github.com/h6ah4i/mulsellistperfcompat')
+
+[AndroidDeviceCompatiblity-mixi, Inc]('https://github.com/mixi-inc/Android-Device-Compatibility')
+
+[Android ActivityLifecycleCallbacks Compatibility Library-Benoit Lubek]('https://github.com/BoD/android-activitylifecyclecallbacks-compat')
+
+[ImageLayout-ManuelPeinado]('https://github.com/ManuelPeinado/ImageLayout')
+
+[DroidForms-ManuelPeinado]('https://github.com/ManuelPeinado/DroidForms')
+
+[Barone-triposo]('https://github.com/triposo/barone')
+
+
+
 # Credits
 
 

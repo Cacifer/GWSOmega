@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.gridlayout.GridLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 
 import android.util.DisplayMetrics;
@@ -14,6 +15,7 @@ import android.widget.FrameLayout;
 
 
 
+@SuppressLint("ViewConstructor")
 public class QuiltViewBase extends GridLayout {
 	
 	public int[] size;
