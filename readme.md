@@ -62,7 +62,7 @@ modifications are however mine and licensed under Apache 2.0 License.
 
 [AndroidProgressFramework-Evgeny Shishkin]('https://github.com/johnkil/Android-ProgressFragment')
 
-[AndroidSlidingLyaerLibrary-6Wunderkinder]('https://github.com/6wunderkinder/android-sliding-layer-lib')
+[AndroidSlidingLayerLibrary-6Wunderkinder]('https://github.com/6wunderkinder/android-sliding-layer-lib')
 
 [TabCarouselLib-adneal]('https://bitbucket.org/adneal/tabcarousellib')
 
@@ -122,6 +122,13 @@ modifications are however mine and licensed under Apache 2.0 License.
 
 [Barone-triposo]('https://github.com/triposo/barone')
 
+[AndroidSwipeListView-47deg]('https://github.com/47deg/android-swipelistview')
+
+[SwipeToDismissUndoList-Tim Roes]('https://github.com/timroes/SwipeToDismissUndoList')
+
+[AndroidNewPopupMenu-]('https://github.com/u1aryz/Android-NewPopupMenu')
+
+[AndroidGestureDetectors-Almeros]('https://github.com/Almeros/android-gesture-detectors')
 
 
 # Credits
