@@ -142,6 +142,8 @@ modifications are however mine and licensed under Apache 2.0 License.
 
 [AndroidPullToRefresh-Johan Nilsson]('https://github.com/johannilsson/android-pulltorefresh')
 
+[eventBus-Greenrobot]('https://github.com/greenrobot/EventBus')
+
 # Credits
 
 
