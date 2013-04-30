@@ -15,6 +15,7 @@
  */
 package de.timroes.swipetodismiss;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Rect;
 import android.os.Handler;
@@ -56,6 +57,7 @@ import static com.nineoldandroids.view.ViewPropertyAnimator.animate;
  * 
  * Read the README file for a detailed explanation on how to use this class.
  */
+@SuppressLint("Recycle")
 public final class SwipeDismissList implements View.OnTouchListener {
 	
 	// Cached ViewConfiguration and system-wide constant values
@@ -628,6 +630,7 @@ public final class SwipeDismissList implements View.OnTouchListener {
 	/**
 	 * Handler used to hide the undo popup after a special delay.
 	 */
+	@SuppressLint("HandlerLeak")
 	private class HideUndoPopupHandler extends Handler {
 
 		@Override

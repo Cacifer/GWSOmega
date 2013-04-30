@@ -25,6 +25,7 @@
 package org.jraf.android.backport.switchwidget;
 
 import gws.grottworkshop.gwsomega.R;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
@@ -57,6 +58,7 @@ import android.widget.CompoundButton;
  * the related seSwitchTypeface() methods control that of the thumb.
  * 
  */
+@SuppressLint("Recycle")
 public class Switch extends CompoundButton {
     private static final int TOUCH_MODE_IDLE = 0;
     private static final int TOUCH_MODE_DOWN = 1;

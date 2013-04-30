@@ -1,12 +1,14 @@
 package com.droidforms.views;
 
 import gws.grottworkshop.gwsomega.R;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 
 
 
+@SuppressLint("Recycle")
 public class TextFormItem extends AbsTextFormItem {
 
 	private int validationErrorIconResId;

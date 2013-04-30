@@ -194,7 +194,8 @@ public final class HttpResponseCache extends ResponseCache implements ExtendedRe
         RawHeaders varyHeaders = httpEngine.getRequestHeaders().getHeaders()
                 .getAll(response.getVaryFields());
         Entry entry = new Entry(uri, varyHeaders, httpConnection);
-        DiskLruCache.Snapshot snapshot = (conditionalCacheHit instanceof EntryCacheResponse)
+        @SuppressWarnings("resource")
+		DiskLruCache.Snapshot snapshot = (conditionalCacheHit instanceof EntryCacheResponse)
                 ? ((EntryCacheResponse) conditionalCacheHit).snapshot
                 : ((EntrySecureCacheResponse) conditionalCacheHit).snapshot;
         DiskLruCache.Editor editor = null;

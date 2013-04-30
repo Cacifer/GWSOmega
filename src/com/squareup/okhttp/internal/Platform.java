@@ -311,7 +311,8 @@ public class Platform {
       this.protocols = protocols;
     }
 
-    @Override public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    @SuppressWarnings({ "unused", "rawtypes" })
+	@Override public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
       String methodName = method.getName();
       Class<?> returnType = method.getReturnType();
       if (args == null) {

@@ -177,9 +177,9 @@ final class HttpsURLConnectionImpl extends HttpsURLConnection {
         return delegate.getContent();
     }
 
-    @SuppressWarnings("unchecked") // Spec does not generify
+     // Spec does not generify
     @Override
-    public Object getContent(Class[] types) throws IOException {
+    public Object getContent(@SuppressWarnings("rawtypes") Class[] types) throws IOException {
         return delegate.getContent(types);
     }
 

@@ -5,6 +5,7 @@ import gws.grottworkshop.gwsomega.R;
 import java.util.ArrayList;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 
@@ -22,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 
+@SuppressLint("Recycle")
 public class QuiltView extends FrameLayout implements OnGlobalLayoutListener {
 
 	public QuiltViewBase quilt;

@@ -76,7 +76,7 @@ import java.util.TimeZone;
  * @attr ref android.R.styleable#DatePicker_calendarViewShown
  */
 //@Widget
-@SuppressLint("NewApi")
+@SuppressLint({ "NewApi", "SimpleDateFormat" })
 public class DatePicker extends FrameLayout {
 
     private static final String LOG_TAG = DatePicker.class.getSimpleName();

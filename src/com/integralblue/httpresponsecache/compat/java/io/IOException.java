@@ -1,5 +1,6 @@
 package com.integralblue.httpresponsecache.compat.java.io;
 
+@SuppressWarnings("serial")
 public class IOException extends java.io.IOException {
 
     public IOException() {

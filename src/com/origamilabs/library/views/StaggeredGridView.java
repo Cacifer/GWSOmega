@@ -26,6 +26,7 @@ import java.util.Arrays;
 
 
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -70,6 +71,7 @@ import android.widget.ListAdapter;
  * The attribute <code>android:layout_span</code> may be used when inflating
  * item views from xml.</p>
  */
+@SuppressLint("Recycle")
 public class StaggeredGridView extends ViewGroup {
     private static final String TAG = "StaggeredGridView";
 

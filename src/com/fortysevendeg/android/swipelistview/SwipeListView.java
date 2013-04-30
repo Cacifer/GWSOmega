@@ -19,6 +19,7 @@
 package com.fortysevendeg.android.swipelistview;
 
 import gws.grottworkshop.gwsomega.R;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.database.DataSetObserver;
@@ -33,6 +34,7 @@ import android.widget.ListView;
 /**
  * ListView subclass that provides the swipe functionality
  */
+@SuppressLint("Recycle")
 public class SwipeListView extends ListView {
 
     /**

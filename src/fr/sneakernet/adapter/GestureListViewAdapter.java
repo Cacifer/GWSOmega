@@ -14,6 +14,7 @@ import gws.grottworkshop.gwsomega.R;
 
 public class GestureListViewAdapter extends BaseAdapter
 {
+	@SuppressWarnings("unused")
 	private Context mContext;
 	private LayoutInflater mInflater;
 	private List<Sample> mList;

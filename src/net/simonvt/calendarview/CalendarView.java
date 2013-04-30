@@ -78,7 +78,7 @@ import java.util.TimeZone;
  * @attr ref android.R.styleable#CalendarView_dateTextAppearance
  */
 //@Widget
-@SuppressLint("NewApi")
+@SuppressLint({ "NewApi", "SimpleDateFormat" })
 public class CalendarView extends FrameLayout {
 
     /**

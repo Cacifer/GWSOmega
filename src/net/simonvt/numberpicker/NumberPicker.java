@@ -95,7 +95,7 @@ import java.util.Locale;
  * </p>
  */
 //@Widget
-@SuppressLint("NewApi")
+@SuppressLint({ "NewApi", "DefaultLocale" })
 public class NumberPicker extends LinearLayout {
 
     /**
@@ -2235,7 +2235,8 @@ public class NumberPicker extends LinearLayout {
     /**
      * Class for managing virtual view tree rooted at this picker.
      */
-    class AccessibilityNodeProviderImpl extends AccessibilityNodeProvider {
+    @SuppressLint("DefaultLocale")
+	class AccessibilityNodeProviderImpl extends AccessibilityNodeProvider {
         private static final int UNDEFINED = Integer.MIN_VALUE;
 
         private static final int VIRTUAL_VIEW_ID_INCREMENT = 1;
@@ -2491,7 +2492,8 @@ public class NumberPicker extends LinearLayout {
             }
         }
 
-        private void findAccessibilityNodeInfosByTextInChild(String searchedLowerCase,
+        @SuppressLint("DefaultLocale")
+		private void findAccessibilityNodeInfosByTextInChild(String searchedLowerCase,
                 int virtualViewId, List<AccessibilityNodeInfo> outResult) {
             switch (virtualViewId) {
                 case VIRTUAL_VIEW_ID_DECREMENT: {

@@ -150,7 +150,8 @@ public class PopupMenu {
         mContentView.measure(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 
         int rootHeight = mContentView.getMeasuredHeight();
-        int screenHeight = mWindowManager.getDefaultDisplay().getHeight();
+        @SuppressWarnings("deprecation")
+		int screenHeight = mWindowManager.getDefaultDisplay().getHeight();
 
         // Set x-coordinate to display the popup menu
         xPos = anchorRect.centerX() - mPopupWindow.getWidth() / 2;

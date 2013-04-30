@@ -1,5 +1,6 @@
 package com.integralblue.httpresponsecache.compat.java.net;
 
+@SuppressWarnings("serial")
 public class SocketException extends java.net.SocketException {
 
     public SocketException() {

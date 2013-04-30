@@ -24,6 +24,7 @@ import java.net.SocketException;
  * errno value, for comparison against the constants in {@link OsConstants}, should sophisticated
  * callers need to adjust their behavior based on the exact failure.
  */
+@SuppressWarnings("serial")
 public final class ErrnoException extends Exception {
     private final String functionName;
     public final int errno;

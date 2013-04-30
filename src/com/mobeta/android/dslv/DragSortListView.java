@@ -21,6 +21,7 @@
 
 package com.mobeta.android.dslv;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.database.DataSetObserver;
@@ -58,6 +59,7 @@ import java.util.ArrayList;
  * @author heycosmo
  *
  */
+@SuppressLint("Recycle")
 public class DragSortListView extends ListView {
     
     

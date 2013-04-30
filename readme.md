@@ -142,7 +142,9 @@ modifications are however mine and licensed under Apache 2.0 License.
 
 [AndroidPullToRefresh-Johan Nilsson]('https://github.com/johannilsson/android-pulltorefresh')
 
-[eventBus-Greenrobot]('https://github.com/greenrobot/EventBus')
+[EventBus-Greenrobot]('https://github.com/greenrobot/EventBus')
+
+[AndroidBinding-queei]('https://github.com/gueei/AndroidBinding')
 
 # Credits
 
